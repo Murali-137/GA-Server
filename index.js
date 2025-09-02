@@ -14,45 +14,36 @@ import { connectCloudinary } from './config/cloudinary.js';
 dotenv.config();
 
 const app = express();
-
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://quiba.onrender.com'
-];
-
-app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, origin);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
-}));
-
-app.options('*', cors());
+const allowedOrigins = ['http://localhost:5173','https://quiba.onrender.com']
 
 app.use(express.json());
-app.use(cookieParser());
+app.use(cors({
+    origin: allowedOrigins,
+    credentials:true
+}))
+app.use(cookieParser())
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.get('/',(req,res)=>{
+    res.send('Hello World!');
+})
+
+
+
+
 
 app.use("/images", express.static("uploads"));
-app.use('/api/user', userRoutes);
-app.use('/api/admin', sellerRoutes);
-app.use('/api/product', productRoutes);
-app.use('/api/cart', cartRoutes);
-app.use('/api/order', orderRoutes);
-app.use('/api/address', addressRoutes);
+app.use('/api/user',userRoutes);
+app.use('/api/admin',sellerRoutes);
+app.use('/api/product',productRoutes);
+app.use('/api/cart',cartRoutes);
+app.use('/api/order',orderRoutes);
+app.use('/api/address',addressRoutes);
 
 const PORT = process.env.PORT || 5000;
 
 connectDB();
 connectCloudinary();
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(PORT,(req,res)=>{
+    console.log(`Server is running on port ${PORT}`);
 });
