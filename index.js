@@ -47,7 +47,8 @@ app.use('/api/address', addressRoutes);
 
 app.use(express.static(path.join(__dirname, 'client/dist')));
 
-app.get('*', (req, res) => {
+// ✅ Fixed: Use a compatible wildcard route
+app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
 });
 
