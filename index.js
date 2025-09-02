@@ -14,7 +14,7 @@ import { connectCloudinary } from './config/cloudinary.js';
 dotenv.config();
 
 const app = express();
-const allowedOrigins = ['http://localhost:5173',"https://quibaback.onrender.com/"]
+const allowedOrigins = ['http://localhost:5173',"https://quibaback.onrender.com"]
 
 app.use(express.json());
 app.use(cors({
