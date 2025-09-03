@@ -18,7 +18,7 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:5173', 'https://incandescent-druid-13b88a.netlify.app'];
+const allowedOrigins = ['http://localhost:5173', 'https://quiba.netlify.app'];
 
 app.use(cors({
   origin: (origin, callback) => {
