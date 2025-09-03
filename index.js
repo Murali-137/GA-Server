@@ -18,7 +18,18 @@ dotenv.config();
 
 const app = express();
 
+const allowedOrigins = ['http://localhost:5173', 'https://incandescent-druid-13b88a.netlify.app'];
 
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, origin);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 
 app.use(express.json());
 app.use(cookieParser());
