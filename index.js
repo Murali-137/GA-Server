@@ -15,8 +15,6 @@ import { connectCloudinary } from './config/cloudinary.js';
 
 dotenv.config();
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const app = express();
 
@@ -45,12 +43,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/address', addressRoutes);
 
-app.use(express.static(path.join(__dirname, 'client/dist')));
 
-// ✅ Fixed: Use a compatible wildcard route
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/dist', 'index.html'));
-});
 
 const PORT = process.env.PORT || 5000;
 
